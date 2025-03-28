@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Boxes</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            gap: 20px;
+            background-color:lightgray;
+        }
+
+        .block {
+            width: 150px;
+            height: 150px;
+            background: lightskyblue;
+            text-align: center;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .expanded {
+            width: 250px;
+            height: 250px;
+        }
+
+        .options {
+            display: none;
+            margin-top: 10px;
+        }
+
+        .expanded .options {
+            display: block;
+        }
+
+        button {
+            margin: 5px;
+            padding: 5px 10px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="block" onclick="toggleBox(this)" data-original-color="lightskyblue">
+        <div class="options">
+            <button onclick="changeColor(event, this.parentNode.parentNode, 'red')">Red</button>
+            <button onclick="changeColor(event, this.parentNode.parentNode, 'blue')">Blue</button>
+            <button onclick="resetColor(event, this)">Reset</button>
+        </div>
+    </div>
+    
+    <div class="block" onclick="toggleBox(this)" data-original-color="lightskyblue">
+        <div class="options">
+            <button onclick="changeColor(event, this.parentNode.parentNode, 'red')">Red</button>
+            <button onclick="changeColor(event, this.parentNode.parentNode, 'blue')">Blue</button>
+            <button onclick="resetColor(event, this)">Reset</button>
+        </div>
+    </div>
+    
+    <div class="block" onclick="toggleBox(this)" data-original-color="lightskyblue">
+        <div class="options">
+            <button onclick="changeColor(event, this.parentNode.parentNode, 'red')">Red</button>
+            <button onclick="changeColor(event, this.parentNode.parentNode, 'blue')">Blue</button>
+            <button onclick="resetColor(event, this)">Reset</button>
+        </div>
+    </div>
+
+    <script>
+        function toggleBox(block) {
+            block.classList.toggle('expanded');
+        }
+
+        function changeColor(event, block, color) {
+            event.stopPropagation();
+            block.style.backgroundColor = color;
+        }
+
+        function resetColor(event, btn) {
+            event.stopPropagation();
+            let block = btn.closest('.block');
+            block.style.backgroundColor = block.getAttribute('data-original-color'); 
+            block.classList.remove('expanded'); 
+        }
+    </script>
+</body>
+</html>
